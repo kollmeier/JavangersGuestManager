@@ -34,4 +34,7 @@ public class GuestList {
         }
         return guests;
     }
+
+    public void addGuest(String guest) {
+    }
 }
