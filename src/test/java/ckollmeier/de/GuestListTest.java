@@ -74,6 +74,55 @@ class GuestListTest {
     void getGuests_shouldThrowIoExceptionWhenFileDoesNotExist() {
         GuestList guestList = GuestList.builder().build();
 
+        try {
+            Files.deleteIfExists(GuestList.PATH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         assertThrows(IOException.class, guestList::getGuests);
+    }
+
+    @Test
+    void addGuest_shouldAddGuestToGuestList() {
+        GuestList guestList = GuestList.builder().build();
+
+        guestList.setGuests(new ArrayList<>(List.of("Karl", "Uschi")));
+
+        guestList.addGuest("Marleen");
+
+        try {
+            assertEquals(List.of("Karl", "Uschi", "Marleen"), guestList.getGuests());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void addGuest_shouldNotAddDuplicateGuestToGuestList() {
+        GuestList guestList = GuestList.builder().build();
+
+        guestList.setGuests(new ArrayList<>(List.of("Karl", "Uschi")));
+
+        guestList.addGuest("Karl");
+
+        try {
+            assertEquals(List.of("Karl", "Uschi"), guestList.getGuests());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void addGuest_shouldThrowIOExceptionWhenGuestNotExists() {
+        GuestList guestList = GuestList.builder().build();
+
+        try {
+            Files.deleteIfExists(GuestList.PATH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        assertThrows(IOException.class, () -> guestList.addGuest("Karl"));
     }
 }
