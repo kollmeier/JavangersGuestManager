@@ -1,7 +1,6 @@
 package ckollmeier.de;
 
 import lombok.Builder;
-import lombok.With;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +13,6 @@ import java.util.List;
  * Provides functionality to add guests, retrieve guests, and persist the guest list to a file.
  */
 @Builder
-@With
 public class GuestList {
     /**
      * The file path where the guest list is stored.
