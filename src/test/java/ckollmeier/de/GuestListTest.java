@@ -12,29 +12,21 @@ import static org.assertj.core.api.Assertions.*;
 
 class GuestListTest {
     @Test
-    void getGuests_shouldBeEmptyInitially() {
+    void getGuests_shouldBeEmptyInitially() throws IOException {
         GuestList guestList = GuestList.builder().build();
 
         guestList.setGuests(new ArrayList<>());
 
-        try {
-            assertTrue(guestList.getGuests().isEmpty());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        assertTrue(guestList.getGuests().isEmpty());
     }
 
     @Test
-    void getGuests_shouldReadSameGuestsAsWrittenBefore() {
+    void getGuests_shouldReadSameGuestsAsWrittenBefore() throws IOException {
         GuestList guestList = GuestList.builder().build();
 
         guestList.setGuests(new ArrayList<>(List.of("Karl", "Ute")));
 
-        try {
-            assertEquals(List.of("Karl", "Ute"), guestList.getGuests());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        assertEquals(List.of("Karl", "Ute"), guestList.getGuests());
     }
 
     @Test
@@ -52,73 +44,46 @@ class GuestListTest {
     }
 
     @Test
-    void getGuests_shouldReadFromFileSystem() {
+    void getGuests_shouldReadFromFileSystem() throws IOException {
         GuestList guestList = GuestList.builder().build();
 
         List<String> guests =  new ArrayList<>(List.of("Stephan", "Max"));
 
-        try {
-            Files.write(GuestList.PATH, guests);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        Files.write(GuestList.PATH, guests);
 
-        try {
-            assertEquals(guests, guestList.getGuests());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        assertEquals(guests, guestList.getGuests());
     }
 
     @Test
-    void getGuests_shouldThrowIoExceptionWhenFileDoesNotExist() {
+    void getGuests_shouldThrowIoExceptionWhenFileDoesNotExist() throws IOException {
         GuestList guestList = GuestList.builder().build();
 
-        try {
-            Files.deleteIfExists(GuestList.PATH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Files.deleteIfExists(GuestList.PATH);
+        Files.deleteIfExists(GuestList.PATH);
 
         assertThrows(IOException.class, guestList::getGuests);
     }
 
     @Test
-    void addGuest_shouldAddGuestToGuestList() {
+    void addGuest_shouldAddGuestToGuestList() throws IOException {
         GuestList guestList = GuestList.builder().build();
 
         guestList.setGuests(new ArrayList<>(List.of("Karl", "Uschi")));
 
-        try {
-            guestList.addGuest("Marleen");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        guestList.addGuest("Marleen");
 
-        try {
-            assertEquals(List.of("Karl", "Uschi", "Marleen"), guestList.getGuests());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        assertEquals(List.of("Karl", "Uschi", "Marleen"), guestList.getGuests());
     }
 
     @Test
-    void addGuest_shouldNotAddDuplicateGuestToGuestList() {
+    void addGuest_shouldNotAddDuplicateGuestToGuestList() throws IOException {
         GuestList guestList = GuestList.builder().build();
 
         guestList.setGuests(new ArrayList<>(List.of("Karl", "Uschi")));
 
-        try {
-            guestList.addGuest("Karl");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        guestList.addGuest("Karl");
 
-        try {
-            assertEquals(List.of("Karl", "Uschi"), guestList.getGuests());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        assertEquals(List.of("Karl", "Uschi"), guestList.getGuests());
     }
 
     @Test
