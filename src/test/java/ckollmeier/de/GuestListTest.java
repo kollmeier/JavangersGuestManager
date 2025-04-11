@@ -29,7 +29,7 @@ class GuestListTest {
     }
 
     @Test
-    void setGuestsShouldWriteToFileSystem() {
+    void setGuests_shouldWriteToFileSystem() {
         GuestList guestList = GuestList.builder().build();
 
         guestList.setGuests(new ArrayList<>(List.of("Theodor", "Anette")));
