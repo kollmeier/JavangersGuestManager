@@ -89,7 +89,11 @@ class GuestListTest {
 
         guestList.setGuests(new ArrayList<>(List.of("Karl", "Uschi")));
 
-        guestList.addGuest("Marleen");
+        try {
+            guestList.addGuest("Marleen");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             assertEquals(List.of("Karl", "Uschi", "Marleen"), guestList.getGuests());
@@ -104,7 +108,11 @@ class GuestListTest {
 
         guestList.setGuests(new ArrayList<>(List.of("Karl", "Uschi")));
 
-        guestList.addGuest("Karl");
+        try {
+            guestList.addGuest("Karl");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             assertEquals(List.of("Karl", "Uschi"), guestList.getGuests());
