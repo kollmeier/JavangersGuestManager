@@ -2,6 +2,7 @@ package ckollmeier.de;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,11 @@ class GuestListTest {
 
         guestList.setGuests(new ArrayList<>());
 
-        assertTrue(guestList.getGuests().isEmpty());
+        try {
+            assertTrue(guestList.getGuests().isEmpty());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -25,7 +30,11 @@ class GuestListTest {
 
         guestList.setGuests(new ArrayList<>(List.of("Karl", "Ute")));
 
-        assertEquals(List.of("Karl", "Ute"), guestList.getGuests());
+        try {
+            assertEquals(List.of("Karl", "Ute"), guestList.getGuests());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -54,7 +63,11 @@ class GuestListTest {
             throw new RuntimeException(e);
         }
 
-        assertEquals(guests, guestList.getGuests());
+        try {
+            assertEquals(guests, guestList.getGuests());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
