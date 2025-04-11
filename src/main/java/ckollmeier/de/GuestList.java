@@ -24,6 +24,11 @@ public class GuestList {
     }
 
     public List<String> getGuests() {
+        try {
+            guests.addAll(Files.readAllLines(PATH));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return guests;
     }
 }
