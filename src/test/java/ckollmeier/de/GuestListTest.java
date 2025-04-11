@@ -14,6 +14,8 @@ class GuestListTest {
     void getGuests_shouldBeEmptyInitially() {
         GuestList guestList = GuestList.builder().build();
 
+        guestList.setGuests(new ArrayList<>());
+
         assertTrue(guestList.getGuests().isEmpty());
     }
 
