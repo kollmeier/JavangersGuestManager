@@ -3,6 +3,7 @@ package ckollmeier.de;
 import lombok.Builder;
 import lombok.With;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,9 +24,11 @@ public class GuestList {
         }
     }
 
-    public List<String> getGuests() {
+    public List<String> getGuests() throws IOException {
         try {
             guests.addAll(Files.readAllLines(PATH));
+        } catch (IOException io) {
+            throw new IOException(io);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
