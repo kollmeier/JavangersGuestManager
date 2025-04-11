@@ -13,6 +13,8 @@ public class GuestList {
     private final List<String> guests = new ArrayList<>();
 
     public void setGuests(List<String> guests) {
+        this.guests.clear();
+        this.guests.addAll(guests);
     }
 
     public List<String> getGuests() {
