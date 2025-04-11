@@ -56,4 +56,11 @@ class GuestListTest {
 
         assertEquals(guests, guestList.getGuests());
     }
+
+    @Test
+    void getGuests_shouldThrowIoExceptionWhenFileDoesNotExist() {
+        GuestList guestList = GuestList.builder().build();
+
+        assertThrows(IOException.class, guestList::getGuests);
+    }
 }
