@@ -41,4 +41,19 @@ class GuestListTest {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    void getGuests_shouldReadFromFileSystem() {
+        GuestList guestList = GuestList.builder().build();
+
+        List<String> guests =  new ArrayList<>(List.of("Stephan", "Max"));
+
+        try {
+            Files.write(GuestList.PATH, guests);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        assertEquals(guests, guestList.getGuests());
+    }
 }
