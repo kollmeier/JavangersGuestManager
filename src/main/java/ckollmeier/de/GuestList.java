@@ -35,6 +35,14 @@ public class GuestList {
         return guests;
     }
 
-    public void addGuest(String guest) {
+    public void addGuest(String guest) throws IOException {
+        List<String> guests = getGuests();
+
+        if (guests.stream().anyMatch(g -> g.equals(guest))) {
+            return;
+        }
+        guests.add(guest);
+
+        setGuests(guests);
     }
 }
