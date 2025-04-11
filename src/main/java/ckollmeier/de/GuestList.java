@@ -3,6 +3,7 @@ package ckollmeier.de;
 import lombok.Builder;
 import lombok.With;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,11 @@ public class GuestList {
     private final List<String> guests = new ArrayList<>();
 
     public void setGuests(List<String> guests) {
-        this.guests.clear();
-        this.guests.addAll(guests);
+        try {
+            Files.write(PATH, guests);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<String> getGuests() {
