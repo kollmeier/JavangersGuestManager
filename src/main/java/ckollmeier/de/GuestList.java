@@ -26,6 +26,7 @@ public class GuestList {
 
     public List<String> getGuests() throws IOException {
         try {
+            guests.clear();
             guests.addAll(Files.readAllLines(PATH));
         } catch (IOException io) {
             throw new IOException(io);
@@ -36,7 +37,7 @@ public class GuestList {
     }
 
     public void addGuest(String guest) throws IOException {
-        List<String> guests = getGuests();
+        getGuests();
 
         if (guests.stream().anyMatch(g -> g.equals(guest))) {
             return;
