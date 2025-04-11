@@ -4,16 +4,18 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.With;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
 @With
-@NoArgsConstructor
 public class GuestList {
+    private final List<String> guests = new ArrayList<>();
+
     public void setGuests(List<String> guests) {
     }
 
     public List<String> getGuests() {
-        return null;
+        return guests;
     }
 }
